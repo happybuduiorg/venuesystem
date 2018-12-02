@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>验证邮件</title>
+</head>
+
+<body>
+<p th:text="'亲爱的'+${userName}+',您好! 这是验证邮件,请点击下面的链接完成验证。'"></p>
+<a href="#" th:href="@{http://localhost:8080/user/activemail(maskid=${maskId},vercode=${verCode})}">激活账号</a>
+</body>
+</html>
