@@ -3,7 +3,9 @@ package com.happybudui.venuesystem.mapper;
 import com.happybudui.venuesystem.entity.VenueEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -23,9 +25,11 @@ public interface VenueMapper {
     @Select("select * from venue where venuestatus = true")
     public List<VenueEntity> getAllVenues();
 
+    @Cacheable("#p0")
     @Select("select * from venue where venueid=#{venueId} and venuestatus = true")
     public VenueEntity getVenueById(@Param("venueId") int venueId);
-
+    
+    @CacheEvict(key ="#p0",allEntries=true)
     @Delete("delete from venue where venueid=#{venueId}")
     public int deleteVenueById(@Param("venueId")int venueId);
 

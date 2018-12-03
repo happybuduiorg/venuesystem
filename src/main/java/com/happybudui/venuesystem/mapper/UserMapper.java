@@ -56,7 +56,7 @@ public interface UserMapper {
     int updateUserMailById(@Param("userId")String userId, @Param("userMail")String userMail);
 
     //frozen user
-    @CacheEvict(key ="#p0",allEntries=true)
+    @CachePut(key ="#p0")
     @Update("update \"user\" set userstatus = 1 where userid =#{userId}::uuid and userstatus = 0")
     int frozenUserById(@Param("userId") String userId);
 
