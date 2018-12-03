@@ -2,6 +2,7 @@ package com.happybudui.venuesystem.mapper;
 
 import com.happybudui.venuesystem.entity.VenueEntity;
 import org.apache.ibatis.annotations.*;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 ////Written by Happybudui
 
 @Mapper
+@CacheConfig(cacheNames = "venue")
 public interface VenueMapper {
 
     @Insert("insert into venue(venuename,venueplace,venuedescription,venueprice,venueareanum," +
@@ -18,15 +20,12 @@ public interface VenueMapper {
             "#{venueCloseTime},#{venueInterval},#{venueMaxIntervals},#{venueStatus})")
     public int insertVenue(VenueEntity venueEntity);
 
-    @CachePut(key = "#p0")
     @Select("select * from venue where venuestatus = true")
     public List<VenueEntity> getAllVenues();
 
-    @CachePut(key = "#p0")
     @Select("select * from venue where venueid=#{venueId} and venuestatus = true")
     public VenueEntity getVenueById(@Param("venueId") int venueId);
 
-    @CachePut(key = "#p0")
     @Delete("delete from venue where venueid=#{venueId}")
     public int deleteVenueById(@Param("venueId")int venueId);
 
