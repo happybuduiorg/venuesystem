@@ -64,7 +64,7 @@ public interface VenueMapper {
 
     @CachePut(key = "#p0")
     @Update("update venue set venuemaxintervals=#{venueMaxIntervals} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueMaxInterval(@Param("venueId")int venueId, @Param("venuemaxintervals")int venueMaxIntervals);
+    public int changeVenueMaxIntervals(@Param("venueId")int venueId, @Param("venuemaxintervals")int venueMaxIntervals);
 
 
 }
