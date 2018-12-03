@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import java.sql.Date;
 import java.util.Objects;
 
+//CopyRight © 2018-2018 Happybudui All Rights Reserved.
+//Written by Happybudui
+
 @EntityScan
 public class VenueEntity {
     int venueId;
@@ -17,7 +20,7 @@ public class VenueEntity {
     Date venueCloseTIme;
     int venueInterval;
     int venueMaxIntervals;
-    boolean venueStatus;
+    boolean venueStatus = true;
 
     public VenueEntity() {
     }

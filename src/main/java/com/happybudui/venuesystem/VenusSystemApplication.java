@@ -18,4 +18,3 @@ public class VenusSystemApplication {
         SpringApplication.run(VenusSystemApplication.class, args);
     }
 }
-

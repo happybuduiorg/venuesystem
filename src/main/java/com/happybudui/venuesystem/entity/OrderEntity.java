@@ -6,6 +6,9 @@ import java.sql.Date;
 import java.util.Objects;
 import java.util.UUID;
 
+//CopyRight © 2018-2018 Happybudui All Rights Reserved.
+//Written by Happybudui
+
 @EntityScan
 public class OrderEntity {
 
