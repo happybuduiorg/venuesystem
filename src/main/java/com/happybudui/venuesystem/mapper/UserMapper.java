@@ -73,5 +73,4 @@ public interface UserMapper {
     @CachePut(key = "#p0")
     @Select("select \"ismailactive\" from \"user\" where usermail=#{usermail} and isdelete = false")
     boolean getUserIsMailActiveByMail(@Param("userMail")String userMail);
-
 }
