@@ -2,6 +2,7 @@ package com.happybudui.venuesystem.entity;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
 //Written by Happybudui
 
 @EntityScan
-public class NewsEntity {
+public class NewsEntity implements Serializable {
     private String newsId;
 
     private String newsContent;

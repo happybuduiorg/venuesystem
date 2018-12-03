@@ -2,6 +2,7 @@ package com.happybudui.venuesystem.entity;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -10,7 +11,7 @@ import java.util.UUID;
 //Written by Happybudui
 
 @EntityScan
-public class OrderEntity {
+public class OrderEntity implements Serializable {
 
     private String orderId;
     private Date orderDate;
