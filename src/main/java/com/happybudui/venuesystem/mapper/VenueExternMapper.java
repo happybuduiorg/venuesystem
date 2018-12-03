@@ -28,8 +28,8 @@ public interface VenueExternMapper {
     int getVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot);
 
     @Cacheable(key="#p0")
-    @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
-    int getVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot, @Param("arearemain")int areaRemain);
+    @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek}")
+    int modifyVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("arearemain")int areaRemain);
 
     @CachePut(key="#p0")
     @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
