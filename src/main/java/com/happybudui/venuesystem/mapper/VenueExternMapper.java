@@ -3,6 +3,7 @@ package com.happybudui.venuesystem.mapper;
 import com.happybudui.venuesystem.entity.VenueExternEntity;
 import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -26,8 +27,15 @@ public interface VenueExternMapper {
     @Select("select arearemain from venueextern where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
     int getVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot);
 
+    @Cacheable(key="#p0")
+    @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
+    int getVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot, @Param("arearemain")int areaRemain);
+
     @CachePut(key="#p0")
     @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
-    int updateVenueAreaRemain(@Param("venueId")int venueId,@Param("areaRemain")int areaRemain, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot);
+    int updateVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot, @Param("areaRemain")int areaRemain);
 
+    @CacheEvict(key="#p0", allEntries=true)
+    @Delete("delete from venueextern where venueid=#{venueId}")
+    int deleteVenueExternById(@Param("venueId")int venueId);
 }
