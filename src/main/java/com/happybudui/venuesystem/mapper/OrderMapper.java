@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -21,11 +22,13 @@ public interface OrderMapper {
     @Select("select * from order")
     public List<OrderEntity> getAllOrders();
 
+    @Cacheable(key="#p0")
     @Select("select * from order where userid=#{userId}::uuid")
     public List<OrderEntity> getOrderByUserId(@Param("userId") String userId);
 
-    @Select("select * from order where orderstatus = 0")
-    public List<OrderEntity> getOrderByOrderStatus();
+    @Cacheable(key="#p0")
+    @Select("select * from order where orderstatus = #{orderStatus}")
+    public List<OrderEntity> getOrderByOrderStatus(@Param("orderStatus")int orderStatus);
 
     @CacheEvict(key = "#p0",allEntries=true)
     @Delete("delete from order where orderid=#{orderId}")

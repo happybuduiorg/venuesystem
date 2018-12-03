@@ -26,7 +26,7 @@ public interface VenueMapper {
     @Select("select * from venue where venuestatus = true")
     public List<VenueEntity> getAllVenues();
 
-    @Cacheable("#p0")
+    @Cacheable(key="#p0")
     @Select("select * from venue where venueid=#{venueId} and venuestatus = true")
     public VenueEntity getVenueById(@Param("venueId") int venueId);
     
@@ -69,6 +69,5 @@ public interface VenueMapper {
     @CachePut(key = "#p0")
     @Update("update venue set venuemaxintervals=#{venueMaxIntervals} where venueId=#{venueId} and venuestatus = true")
     public int changeVenueMaxIntervals(@Param("venueId")int venueId, @Param("venueMaxIntervals")int venueMaxIntervals);
-
 
 }
