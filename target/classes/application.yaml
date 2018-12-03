@@ -1,0 +1,61 @@
+server:
+  port:8080                                                             #运行端口
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://106.14.140.17/dbtest?useAffectedRows=true    #数据库地址
+    username: postgres                                                  #用户名
+    password: wh123456                                                  #密码
+    hikari:
+      maxLifetime: 1800000  #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
+      maximumPoolSize: 15   #连接池中允许的最大连接数。缺省值：10；推荐的公式：((core_count * 2) + effective_spindle_count)
+  http:
+    encoding:
+      charset: UTF-8        #编码方式
+      force: true
+  servlet:
+    multipart:
+      max-file-size: 10MB     #上传的文件最大长度
+      max-request-size: 10MB
+  redis:
+    database : 0            #Redis数据库索引（默认为0)
+    host : 106.14.140.17    # Redis服务器连接地址
+    port : 6379             # Redis服务器连接端口（默认6379）
+    password : wh123456     # Redis服务器连接密码（默认为空）
+    jedis:
+      pool:
+        max-active: 8       # 连接池中的最大空闲连接
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle : 8        # 连接池中的最大空闲连接
+        min-idle : 0        # 连接池中的最小空闲连接
+    timeout: 1000ms          # 连接超时时间
+  mvc:
+    view:
+      prefix: /html/
+      suffix: .html
+  mail:
+      host: smtp.163.com
+      username: alevery@163.com
+      password: wh123456
+      default-encoding: UTF-8
+  thymeleaf:
+    mode : HTML
+    encoding : UTF-8
+    servlet:
+      content-type: text/html
+      cache : false          #开发时关闭缓存,不然没法看到实时页面
+
+mybatis:
+  type-aliases-package: com.happybudui.springtest.entity    #实体类所在的包
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  path : /user/local/log    #存储Log的地址
+  level:
+    org.springframework.web : INFO    #web日志的级别 INFO
+
+mysite:
+  name: springtest
+  url : http://localhost
+  mailAddr : alevery@163.com

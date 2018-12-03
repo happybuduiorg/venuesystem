@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is the first web page!</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script>
+        $(function() {
+            $("#submit").click(function () {
+                var userid=$("#userid").val();
+                $.ajax({
+                    type:"get",
+                    url:"http://localhost:8080/test/getuserinfojson",
+                    dataType:"json",
+                    data:{"userid":userid},
+                    success:function (data) {
+                        alert(data.username);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+<a>输入id:&nbsp;</a>
+<input id="userid" type="text"><br>
+<button id="submit" >提交</button>
+
+</body>
+</html>
