@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
+import java.sql.Date;
 import java.util.List;
 
 //CopyRight © 2018-2018 Happybudui All Rights Reserved.
@@ -47,7 +48,7 @@ public interface VenueMapper {
 
     @CachePut(key = "#p0")
     @Update("update venue set venueprice=#{venuePrice} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenuePrice(@Param("venueId")int venueId, @Param("venuePrice")int venuePrice);
+    public int changeVenuePrice(@Param("venueId")int venueId, @Param("venuePrice")Double venuePrice);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueareanum=#{venueAreaNum} where venueId=#{venueId} and venuestatus = true")
@@ -55,11 +56,11 @@ public interface VenueMapper {
 
     @CachePut(key = "#p0")
     @Update("update venue set venueopentime=#{venueOpenTime} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueOpenTime(@Param("venueId")int venueId, @Param("venueOpenTime")String venueOpenTime);
+    public int changeVenueOpenTime(@Param("venueId")int venueId, @Param("venueOpenTime") Date venueOpenTime);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueclosetime=#{venueCloseTime} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueCloseTime(@Param("venueId")int venueId, @Param("venueCloseTime")String venueCloseTime);
+    public int changeVenueCloseTime(@Param("venueId")int venueId, @Param("venueCloseTime") Date venueCloseTime);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueinterval=#{venueInterval} where venueId=#{venueId} and venuestatus = true")
