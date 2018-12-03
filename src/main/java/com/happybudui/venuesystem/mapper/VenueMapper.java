@@ -32,5 +32,5 @@ public interface VenueMapper {
     @Update("update venue set venuestatus= true where venueId=#{venueId}")
     public int changeVenueStatusOpen(@Param("venueId")int venueId);
 
-    
+
 }
