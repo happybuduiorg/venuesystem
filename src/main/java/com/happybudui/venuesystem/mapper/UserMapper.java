@@ -56,7 +56,7 @@ public interface UserMapper {
     int updateUserMailById(@Param("userId")String userId, @Param("userMail")String userMail);
 
     //frozen user
-    @CacheEvict(key ="#p0",allEntries=true)
+    @CachePut(key ="#p0")
     @Update("update \"user\" set userstatus = 1 where userid =#{userId}::uuid and userstatus = 0")
     int frozenUserById(@Param("userId") String userId);
 
@@ -71,6 +71,6 @@ public interface UserMapper {
     int updateUserMailActiveStatus(@Param("userId")String userId);
 
     @CachePut(key = "#p0")
-    @Select("select \"ismailactive\" from \"user\" where usermail=#{usermail} and isdelete = false")
+    @Select("select \"ismailactive\" from \"user\" where usermail=#{userMail} and isdelete = false")
     boolean getUserIsMailActiveByMail(@Param("userMail")String userMail);
 }
