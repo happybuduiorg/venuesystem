@@ -2,13 +2,14 @@ package com.happybudui.venuesystem.entity;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 //CopyRight © 2018-2018 Happybudui All Rights Reserved.
 //Written by Happybudui
 
 @EntityScan
-public class VenueExternEntity {
+public class VenueExternEntity implements Serializable {
     int venueId;
     int dayOfWeek;
     int venueSlot;
