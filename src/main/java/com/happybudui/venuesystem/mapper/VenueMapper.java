@@ -40,31 +40,31 @@ public interface VenueMapper {
 
     @CachePut(key = "#p0")
     @Update("update venue set venuedescription=#{venueDescription} where venueId=#{venueId} and venuestatus = true ")
-    public int changeVenueDescription(@Param("venueId")int venueId, @Param("venuedescription")String venueDescription);
+    public int changeVenueDescription(@Param("venueId")int venueId, @Param("venueDescription")String venueDescription);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueprice=#{venuePrice} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenuePrice(@Param("venueId")int venueId, @Param("venueprice")int venuePrice);
+    public int changeVenuePrice(@Param("venueId")int venueId, @Param("venuePrice")int venuePrice);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueareanum=#{venueAreaNum} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueAreaNum(@Param("venueId")int venueId, @Param("venueareanum")int venueAreaNum);
+    public int changeVenueAreaNum(@Param("venueId")int venueId, @Param("venueAreaNum")int venueAreaNum);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueopentime=#{venueOpenTime} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueOpenTime(@Param("venueId")int venueId, @Param("venueopentime")String venueOpenTime);
+    public int changeVenueOpenTime(@Param("venueId")int venueId, @Param("venueOpenTime")String venueOpenTime);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueclosetime=#{venueCloseTime} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueCloseTime(@Param("venueId")int venueId, @Param("venueclosetime")String venueCloseTime);
+    public int changeVenueCloseTime(@Param("venueId")int venueId, @Param("venueCloseTime")String venueCloseTime);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueinterval=#{venueInterval} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueInterval(@Param("venueId")int venueId, @Param("venueinterval")int venueInterval);
+    public int changeVenueInterval(@Param("venueId")int venueId, @Param("venueInterval")int venueInterval);
 
     @CachePut(key = "#p0")
     @Update("update venue set venuemaxintervals=#{venueMaxIntervals} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueMaxIntervals(@Param("venueId")int venueId, @Param("venuemaxintervals")int venueMaxIntervals);
+    public int changeVenueMaxIntervals(@Param("venueId")int venueId, @Param("venueMaxIntervals")int venueMaxIntervals);
 
 
 }
