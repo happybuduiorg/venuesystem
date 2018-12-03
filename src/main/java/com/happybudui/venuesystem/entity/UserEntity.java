@@ -28,7 +28,7 @@ public class UserEntity implements Serializable {
     private boolean isMailActive;
 
     public UserEntity(){
-        this.userId = UUID.randomUUID().toString().replaceAll("-","");
+        this.userId = UUID.randomUUID().toString();
         userStatus = 0;
     }
 

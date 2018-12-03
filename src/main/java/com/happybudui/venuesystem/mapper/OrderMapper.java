@@ -19,6 +19,9 @@ public interface OrderMapper {
             "(#{orderStatus},#{orderPrice},#{userId}::uuid ,#{venueId},#{dayOfWeek},#{timeSlot})")
     public int insertOrder(OrderEntity orderEntity);
 
+    @Select("select * from order where orderid=#{orderId}::uuid")
+    public OrderEntity getOrderByOrderId(@Param("orderId")String orderId);
+
     @Select("select * from order")
     public List<OrderEntity> getAllOrders();
 
@@ -30,12 +33,15 @@ public interface OrderMapper {
     @Select("select * from order where orderstatus = #{orderStatus}")
     public List<OrderEntity> getOrderByOrderStatus(@Param("orderStatus")int orderStatus);
 
+    @Select("select * from order where userid=#{userId} and orderstatus=#{orderStatus}")
+    public List<OrderEntity> getUserOrderByStatus(@Param("userId")String userId,@Param("orderStatus")int orderStatus);
+
     @CacheEvict(key = "#p0",allEntries=true)
-    @Delete("delete from order where orderid=#{orderId}")
-    public int deleteOrderById(@Param("orderId")int orderId);
+    @Delete("delete from order where orderid=#{orderId}::uuid")
+    public int deleteOrderById(@Param("orderId")String orderId);
 
     @CachePut(key = "#p0")
     @Update("update order set orderstatus = #{orderStatus} where orderid=#{orderId}")
-    public int changeOrderStatus(@Param("orderId")int orderId, @Param("orderStatus")int orderStatus);
+    public int changeOrderStatus(@Param("orderId")String orderId, @Param("orderStatus")int orderStatus);
 
 }

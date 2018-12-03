@@ -23,7 +23,7 @@ public class OrderEntity implements Serializable {
     private int timeSlot;
 
     public OrderEntity() {
-        this.orderId = UUID.randomUUID().toString().replaceAll("-","");
+        this.orderId = UUID.randomUUID().toString();
         java.util.Date utilDate=new java.util.Date();
         this.orderDate = new Date(utilDate.getTime());
     }
@@ -34,7 +34,7 @@ public class OrderEntity implements Serializable {
         this.venueId = venueId;
         this.dayOfWeek = dayOfWeek;
         this.timeSlot = timeSlot;
-        this.orderId = UUID.randomUUID().toString().replaceAll("-","");
+        this.orderId = UUID.randomUUID().toString();
         java.util.Date utilDate=new java.util.Date();
         this.orderDate = new Date(utilDate.getTime());
     }
