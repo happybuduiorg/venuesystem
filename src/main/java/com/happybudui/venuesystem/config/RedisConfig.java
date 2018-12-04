@@ -1,4 +1,4 @@
-package com.happybudui.springbase.config;
+package com.happybudui.venuesystem.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
