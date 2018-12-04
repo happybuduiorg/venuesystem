@@ -20,7 +20,7 @@ import java.util.Map;
 import static com.happybudui.venuesystem.wrapper.ResultGenerator.success;
 
 //CopyRight © 2018-2018 Happybudui All Rights Reserved.
-////Written by Happybudui
+//Written by Happybudui
 
 @Service
 public class OrderService {
@@ -33,27 +33,7 @@ public class OrderService {
         this.orderMapper = orderMapper;
         this.venueMapper = venueMapper;
         this.venueExternMapper = venueExternMapper;
-        initVenueAreaInfo();
-    }
-
-    //初始化场馆信息
-    public void initVenueAreaInfo(){
-        List<VenueEntity> venueEntityList=venueMapper.getAllVenues();
-        for(VenueEntity venueEntity : venueEntityList){
-            int venueId=venueEntity.getVenueId();
-            AreaBean areaBean=new AreaBean(venueMapper,venueExternMapper);
-            areaBean.initData(venueId);
-            venueAreaMap.put(venueId,areaBean);
-        }
-    }
-
-    //根据场馆ID获取场地信息
-    public ResponseResult<AreaBean> getVenueAreaInfo(String venueId){
-        AreaBean areaBean=venueAreaMap.get(Integer.valueOf(venueId));
-        if(areaBean!=null)
-            return ResultGenerator.success(areaBean);
-        else
-            return ResultGenerator.error("Illegal Operation!");
+        venueAreaMap=VenueService.venueAreaMap;
     }
 
     // 用户创建订单

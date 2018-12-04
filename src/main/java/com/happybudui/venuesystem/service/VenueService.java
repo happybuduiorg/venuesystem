@@ -1,5 +1,6 @@
 package com.happybudui.venuesystem.service;
 
+import com.happybudui.venuesystem.bean.AreaBean;
 import com.happybudui.venuesystem.entity.VenueEntity;
 import com.happybudui.venuesystem.mapper.VenueExternMapper;
 import com.happybudui.venuesystem.mapper.VenueMapper;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.happybudui.venuesystem.wrapper.ResultGenerator.error;
 import static com.happybudui.venuesystem.wrapper.ResultGenerator.success;
@@ -22,11 +24,33 @@ import static com.happybudui.venuesystem.wrapper.ResultGenerator.success;
 public class VenueService {
     private final VenueMapper venueMapper;
     private final VenueExternMapper venueExternMapper;
+    public static Map<Integer,AreaBean> venueAreaMap;
 
     @Autowired
     public VenueService(VenueMapper venueMapper,VenueExternMapper venueExternMapper){
         this.venueMapper=venueMapper;
         this.venueExternMapper=venueExternMapper;
+        initVenueAreaInfo();
+    }
+
+    //初始化场馆信息
+    public void initVenueAreaInfo(){
+        List<VenueEntity> venueEntityList=venueMapper.getAllVenues();
+        for(VenueEntity venueEntity : venueEntityList){
+            int venueId=venueEntity.getVenueId();
+            AreaBean areaBean=new AreaBean(venueMapper,venueExternMapper);
+            areaBean.initData(venueId);
+            venueAreaMap.put(venueId,areaBean);
+        }
+    }
+
+    //根据场馆ID获取场地信息
+    public ResponseResult<AreaBean> getVenueAreaInfo(String venueId){
+        AreaBean areaBean=venueAreaMap.get(Integer.valueOf(venueId));
+        if(areaBean!=null)
+            return ResultGenerator.success(areaBean);
+        else
+            return ResultGenerator.error("Illegal Operation!");
     }
 
     //添加场馆
