@@ -1,7 +1,7 @@
 package com.happybudui.venuesystem.controller;
 
-import com.happybudui.venuesystem.entity.UserExternEntity;
-import com.happybudui.venuesystem.mapper.UserMapper;
+import com.happybudui.venuesystem.entity.OrderEntity;
+import com.happybudui.venuesystem.service.OrderService;
 import com.happybudui.venuesystem.service.VenueService;
 import com.happybudui.venuesystem.wrapper.ResponseResult;
 import com.happybudui.venuesystem.wrapper.ResultGenerator;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 //CopyRight © 2018-2018 Happybudui All Rights Reserved.
@@ -24,10 +25,12 @@ public class AdminController {
 
     private AdminService adminService;
     private VenueService venueService;
-
+    private OrderService orderService;
     @Autowired
-    public AdminController(AdminService adminService){
+    public AdminController(AdminService adminService,VenueService venueService,OrderService orderService){
         this.adminService = adminService;
+        this.venueService=venueService;
+        this.orderService=orderService;
     }
 
     // 插入用户
@@ -94,6 +97,30 @@ public class AdminController {
         return venueService.changeVenueDesciption(venueId, venueDescription);
     }
 
+    //管理员获取所有订单
+    @RequestMapping(value = "getAllOrders", method = RequestMethod.POST)
+    ResponseResult<List<OrderEntity>> getAllOrders() {
+        return orderService.getAllOrders();
+    }
+
+    //管理员根据订单状态获取订单
+    @RequestMapping(value = "getOrdersByStatus", method = RequestMethod.POST)
+    ResponseResult<List<OrderEntity>> getOrdersByStatuss(@RequestParam(name = "orderstatus") String orderStatus) {
+        return orderService.getOrdersByStatus(orderStatus);
+    }
+
+    //审核并通过订单
+    @RequestMapping(value = "approveOrder", method = RequestMethod.POST)
+    ResponseResult<Integer> approveOrder(@RequestParam(name = "orderid") String orderId) {
+        return orderService.approveOrder(orderId);
+    }
+
+    //审核并拒绝订单
+    @RequestMapping(value = "disApproveOrderr", method = RequestMethod.POST)
+    ResponseResult<Integer> disApproveOrderr(@RequestParam(name = "orderid") String orderId) {
+        return orderService.disApproveOrder(orderId);
+    }
+
     //上传文件接口
     @RequestMapping("upload")
     public ResponseResult<Integer> upLoad(HttpServletRequest request, MultipartFile file) {
@@ -117,7 +144,4 @@ public class AdminController {
         }
         return ResultGenerator.success();
     }
-
-
-
 }
