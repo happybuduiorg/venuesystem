@@ -3,6 +3,7 @@ package com.happybudui.venuesystem.service;
 import com.happybudui.venuesystem.bean.AreaBean;
 import com.happybudui.venuesystem.entity.OrderEntity;
 import com.happybudui.venuesystem.entity.VenueEntity;
+import com.happybudui.venuesystem.entity.VenueExternEntity;
 import com.happybudui.venuesystem.mapper.OrderMapper;
 import com.happybudui.venuesystem.mapper.VenueExternMapper;
 import com.happybudui.venuesystem.mapper.VenueMapper;
@@ -60,6 +61,10 @@ public class OrderService {
     public ResponseResult<Integer> addOrder(String orderDate, String orderStatus, String orderPrice,
                                             String venueId, String dayOfWeek, String timeSlot, HttpSession session) {
         if (venueMapper.getVenueById(Integer.valueOf(venueId)).isVenueStatus()) {
+            if(venueExternMapper.getVenueAreaRemain(Integer.valueOf(venueId), Integer.valueOf(dayOfWeek), Integer.valueOf(timeSlot))==null) {
+                    venueExternMapper.insertVenueExternInfo(new VenueExternEntity(Integer.valueOf(venueId),Integer.valueOf(dayOfWeek),Integer.valueOf(timeSlot),venueMapper.getVenueById(Integer.valueOf(venueId)).getVenueAreaNum()));
+            }
+
             if (venueExternMapper.getVenueAreaRemain(Integer.valueOf(venueId), Integer.valueOf(dayOfWeek), Integer.valueOf(timeSlot)) != 0) {
                 String thisUserId = (String) session.getAttribute("userId");
 

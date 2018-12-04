@@ -14,7 +14,7 @@ import java.util.List;
 public interface VenueExternMapper {
 
     @Insert("insert into venueextern(venueid, dayofweek, venueslot, arearemain) values(#{venueId}, #{dayOfWeek}, #{venueSlot}, #{areaRemain})")
-    int insertVenueExternInfo(VenueExternEntity venueExternEntity);
+    Integer insertVenueExternInfo(VenueExternEntity venueExternEntity);
 
     @Select("select * from venueextern")
     List<VenueExternEntity> getAllVenueExternInfo();
@@ -25,17 +25,17 @@ public interface VenueExternMapper {
 
     @Cacheable()
     @Select("select arearemain from venueextern where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
-    int getVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot);
+    Integer getVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot);
 
     @Cacheable(key="#p0")
     @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek}")
-    int modifyVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("arearemain")int areaRemain);
+    Integer modifyVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("arearemain")int areaRemain);
 
     @CachePut(key="#p0")
     @Update("update venueextern set arearemain = #{areaRemain} where venueid = #{venueId} and dayofweek = #{dayOfWeek} and venueslot = #{venueSlot}")
-    int updateVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot, @Param("areaRemain")int areaRemain);
+    Integer updateVenueAreaRemain(@Param("venueId")int venueId, @Param("dayOfWeek")int dayOfWeek, @Param("venueSlot")int venueSlot, @Param("areaRemain")int areaRemain);
 
     @CacheEvict(key="#p0", allEntries=true)
     @Delete("delete from venueextern where venueid=#{venueId}")
-    int deleteVenueExternById(@Param("venueId")int venueId);
+    Integer deleteVenueExternById(@Param("venueId")int venueId);
 }

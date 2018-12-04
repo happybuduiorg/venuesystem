@@ -17,7 +17,7 @@ import java.util.List;
 public interface OrderMapper {
     @Insert("insert into order(orderstatus,orderprice,userid,venueid,dayofweek,timeslot) values" +
             "(#{orderStatus},#{orderPrice},#{userId}::uuid ,#{venueId},#{dayOfWeek},#{timeSlot})")
-    public int insertOrder(OrderEntity orderEntity);
+    public Integer insertOrder(OrderEntity orderEntity);
 
     @Select("select * from order where orderid=#{orderId}::uuid")
     public OrderEntity getOrderByOrderId(@Param("orderId")String orderId);
@@ -38,10 +38,10 @@ public interface OrderMapper {
 
     @CacheEvict(key = "#p0",allEntries=true)
     @Delete("delete from order where orderid=#{orderId}::uuid")
-    public int deleteOrderById(@Param("orderId")String orderId);
+    public Integer deleteOrderById(@Param("orderId")String orderId);
 
     @CachePut(key = "#p0")
     @Update("update order set orderstatus = #{orderStatus} where orderid=#{orderId}")
-    public int changeOrderStatus(@Param("orderId")String orderId, @Param("orderStatus")int orderStatus);
+    public Integer changeOrderStatus(@Param("orderId")String orderId, @Param("orderStatus")int orderStatus);
 
 }

@@ -28,46 +28,46 @@ public interface VenueMapper {
 
     @Cacheable(key="#p0")
     @Select("select * from venue where venueid=#{venueId} and venuestatus = true")
-    public VenueEntity getVenueById(@Param("venueId") int venueId);
-    
+    public VenueEntity getVenueById(@Param("venueId") Integer venueId);
+
     @CacheEvict(key ="#p0",allEntries=true)
     @Delete("delete from venue where venueid=#{venueId}")
-    public int deleteVenueById(@Param("venueId")int venueId);
+    public Integer deleteVenueById(@Param("venueId")Integer venueId);
 
     @CachePut(key = "#p0")
     @Update("update venue set venuestatus= false where venueId=#{venueId}")
-    public int changeVenueStatusClose(@Param("venueId")int venueId);
+    public Integer changeVenueStatusClose(@Param("venueId")Integer venueId);
 
     @CachePut(key = "#p0")
     @Update("update venue set venuestatus= true where venueId=#{venueId}")
-    public int changeVenueStatusOpen(@Param("venueId")int venueId);
+    public Integer changeVenueStatusOpen(@Param("venueId")Integer venueId);
 
     @CachePut(key = "#p0")
     @Update("update venue set venuedescription=#{venueDescription} where venueId=#{venueId} and venuestatus = true ")
-    public int changeVenueDescription(@Param("venueId")int venueId, @Param("venueDescription")String venueDescription);
+    public Integer changeVenueDescription(@Param("venueId")Integer venueId, @Param("venueDescription")String venueDescription);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueprice=#{venuePrice} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenuePrice(@Param("venueId")int venueId, @Param("venuePrice")Double venuePrice);
+    public Integer changeVenuePrice(@Param("venueId")Integer venueId, @Param("venuePrice")Double venuePrice);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueareanum=#{venueAreaNum} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueAreaNum(@Param("venueId")int venueId, @Param("venueAreaNum")int venueAreaNum);
+    public Integer changeVenueAreaNum(@Param("venueId")Integer venueId, @Param("venueAreaNum")int venueAreaNum);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueopentime=#{venueOpenTime} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueOpenTime(@Param("venueId")int venueId, @Param("venueOpenTime") Date venueOpenTime);
+    public Integer changeVenueOpenTime(@Param("venueId")Integer venueId, @Param("venueOpenTime") Date venueOpenTime);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueclosetime=#{venueCloseTime} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueCloseTime(@Param("venueId")int venueId, @Param("venueCloseTime") Date venueCloseTime);
+    public Integer changeVenueCloseTime(@Param("venueId")Integer venueId, @Param("venueCloseTime") Date venueCloseTime);
 
     @CachePut(key = "#p0")
     @Update("update venue set venueinterval=#{venueInterval} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueInterval(@Param("venueId")int venueId, @Param("venueInterval")int venueInterval);
+    public Integer changeVenueInterval(@Param("venueId")Integer venueId, @Param("venueInterval")int venueInterval);
 
     @CachePut(key = "#p0")
     @Update("update venue set venuemaxintervals=#{venueMaxIntervals} where venueId=#{venueId} and venuestatus = true")
-    public int changeVenueMaxIntervals(@Param("venueId")int venueId, @Param("venueMaxIntervals")int venueMaxIntervals);
+    public Integer changeVenueMaxIntervals(@Param("venueId")Integer venueId, @Param("venueMaxIntervals")int venueMaxIntervals);
 
 }
